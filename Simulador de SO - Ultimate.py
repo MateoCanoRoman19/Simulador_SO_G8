@@ -83,6 +83,13 @@ def cargarArchivo():
           break
         
         informacion = linea.strip().split(" ")                     #borra los espacios y saltos, luego separa cada vez que haya una coma
+        tam_proceso = int(informacion[3])
+        if tam_proceso > 450:
+            print(f"\tError: El proceso {informacion[0]} con tamaño {tam_proceso}K supera el límite de memoria de usuario (450K).")
+            archivo.close()
+            archivo = None
+            colaArribo.clear()
+            break
         colaArribo.append({
           "id": int(informacion[0][1:]),  # Salta la P
           "ta": int(informacion[1]), 
