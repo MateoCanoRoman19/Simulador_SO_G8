@@ -1,22 +1,5 @@
 import re
-
-pausar = True
-colaArribo = []
-colaNuevo = []
-colaListo = []
-colaListoySuspendido = []
-colaTerminado = []
-memoriaPrincipal = [
-  {"id": 0,"idp": -1,"tipo": "so","base": 0, "tamaño": 100},
-  {"id": 1,"idp": -1,"tipo": "hueco","base": 100, "tamaño": 450}
-]
-idPrincipal = 2
-memoriaAuxiliar = []
-idAuxiliar = 0
-procesoEjecutando = None
-tiempo = 0
-ocurrioEvento = False
-eventos = []
+import time 
 
 def imprimirColasyMemoria():
   print("\nEstado de CPU: ", end='')
@@ -303,10 +286,40 @@ def bucle():
     tiempo += 1
 
   generarInformeEstadistico()
+  
 
 if __name__ == "__main__":
   print("\nSimulador de planificación de procesos")
   print("\n=====================================")
-  cargarArchivo()
-  print("Iniciando simulación...")
-  bucle()
+  
+  while True:
+    
+    pausar = True
+    colaArribo = []
+    colaNuevo = []
+    colaListo = []
+    colaListoySuspendido = []
+    colaTerminado = []
+    memoriaPrincipal = [
+      {"id": 0,"idp": -1,"tipo": "so","base": 0, "tamaño": 100},
+      {"id": 1,"idp": -1,"tipo": "hueco","base": 100, "tamaño": 450}
+    ]
+    idPrincipal = 2
+    memoriaAuxiliar = []
+    idAuxiliar = 0
+    procesoEjecutando = None
+    tiempo = 0
+    ocurrioEvento = False
+    eventos = []
+
+    cargarArchivo()
+    print("Iniciando simulación...")
+    bucle()
+      
+    print("\n=====================================")
+    respuesta = input("Si desea iniciar otro simulador ingrese 'R' (ingrese cualquier otra letra o ENTER para finalizar): ").strip().lower()
+    if respuesta.upper() != 'R':
+        print("\nSimulación finalizada")
+        time.sleep(3)
+        break
+    print("\nReiniciando el simulador...\n" + "="*42)
